@@ -1,0 +1,9 @@
+[
+  {
+    name: BEGIN,
+    classname: ca.nerdnet.brucie.daleks.MainMenuScene,
+  },
+  { name: GAME,
+    classname: ca.nerdnet.brucie.daleks.GameGridScene,
+  }
+]

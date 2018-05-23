@@ -1,0 +1,19 @@
+[
+  {
+    "id": main,
+    "items": [
+      {title: Play, action: play},
+      {title: Info, action: about},
+      {title: Settings, menu: settings},
+    ],
+  },
+
+  {
+    "id": settings,
+    "items": [
+      {title: Back, menu: main},
+    ],
+  },
+
+
+]
