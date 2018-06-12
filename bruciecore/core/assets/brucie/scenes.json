@@ -1,6 +1,22 @@
 [
   {
     name: BEGIN,
-    classname: ca.nerdnet.brucie.unablox.BasicTest,
-  }
+    classname: ca.nerdnet.brucie.unablox.exa.MenuScene,
+  },
+  {
+    name: S-ONE,
+    classname: ca.nerdnet.brucie.unablox.exa.DTriTest,
+  },
+  {
+    name: S-TWO,
+    classname: ca.nerdnet.brucie.unablox.exa.VBOTest,
+  },
+  {
+    name: S-THREE,
+    classname: ca.nerdnet.brucie.unablox.exa.VBOTest2,
+  },
+  {
+    name: S-FOUR,
+    classname: ca.nerdnet.brucie.unablox.exa.VBOTest,
+  },
 ]
