@@ -8,8 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import ca.nerdnet.brucie.core.*;
-import ca.nerdnet.brucie.ui.Panel;
-import ca.nerdnet.brucie.ui.PanelBuilder;
+import ca.nerdnet.brucie.core.ui.*;
 
 public class MenuScene extends Scene implements BrucieListener {
     private static final String TAG = "MENUSCENE";
