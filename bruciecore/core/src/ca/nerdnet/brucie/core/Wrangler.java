@@ -107,6 +107,7 @@ public class Wrangler<T> {
             } catch (Exception e ) {
                 // Couldn't instantiate
                 Gdx.app.log(TAG,"Unable to instantiate: " + classname);
+                e.printStackTrace();
             }
         } else {
             Gdx.app.log(TAG,"No class found for " + name);
