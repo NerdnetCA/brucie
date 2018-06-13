@@ -12,6 +12,10 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new BrucieCore(new BrucieConfig()), config);
+
+		BrucieCore b = new BrucieCore(new BrucieConfig());
+
+
+		initialize(b , config);
 	}
 }

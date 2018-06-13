@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import ca.nerdnet.brucie.core.*;
 import ca.nerdnet.brucie.core.ui.MenuSet;
 import ca.nerdnet.brucie.core.ui.Panel;
+import ca.nerdnet.brucie.core.ui.UiStage;
 
 public class NewUiTest extends Scene implements BrucieListener {
     private static final String TAG = "NEWUITEST";
@@ -21,7 +22,7 @@ public class NewUiTest extends Scene implements BrucieListener {
 
     private Skin mySkin;
     private boolean done;
-    private Stage myStage;
+    private UiStage myStage;
     private float accTime;
     private Panel myPanel;
     private boolean phide;
@@ -30,6 +31,7 @@ public class NewUiTest extends Scene implements BrucieListener {
 
     @Override
     public void dispose() {
+        if(myStage != null) myStage.dispose();
         super.dispose();
     }
 
@@ -40,15 +42,9 @@ public class NewUiTest extends Scene implements BrucieListener {
 
     @Override
     public void show() {
-        AssetManager assetManager = myGame.getAssetManager();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
 
-        OrthographicCamera cam = new OrthographicCamera();
-        cam.setToOrtho(false, BrucieConfig.getVWidth(), BrucieConfig.getVHeight());
-        FitViewport vp = new FitViewport(BrucieConfig.getVWidth(),BrucieConfig.getVHeight(),cam);
-        myStage = new Stage();
-        Gdx.input.setInputProcessor(myStage);
-        myStage.setViewport(vp);
+        myStage = new UiStage();
 
         menuSet = new MenuSet(myGame, mySkin, this);
         menuSet.setPanelWidth(600f);
@@ -57,6 +53,7 @@ public class NewUiTest extends Scene implements BrucieListener {
         Panel p = menuSet.getPanel("MAIN");
         myStage.addActor(p);
         myPanel = p;
+
     }
 
     @Override
@@ -71,7 +68,7 @@ public class NewUiTest extends Scene implements BrucieListener {
 
     @Override
     public void resize(int screenWidth, int screenHeight) {
-        myStage.getViewport().update(screenWidth,screenHeight);
+        myStage.resize(screenWidth,screenHeight);
     }
 
     @Override
