@@ -15,7 +15,7 @@ public class TestMain extends Scene implements BrucieListener {
     private static final String TAG = "TESTMAIN";
     private Texture myAsset;
 
-    private Stage myStage;
+    private UiStage myStage;
     private Skin mySkin;
     private boolean done = false;
 
@@ -33,15 +33,9 @@ public class TestMain extends Scene implements BrucieListener {
 
     @Override
     public void show() {
-        AssetManager assetManager = myGame.getAssetManager();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
 
-        OrthographicCamera cam = new OrthographicCamera();
-        cam.setToOrtho(false, BrucieConfig.getVWidth(), BrucieConfig.getVHeight());
-        FitViewport vp = new FitViewport(BrucieConfig.getVWidth(),BrucieConfig.getVHeight(),cam);
-        myStage = new Stage();
-        Gdx.input.setInputProcessor(myStage);
-        myStage.setViewport(vp);
+        myStage = new UiStage();
 
         // Build the menu
         PanelBuilder pb = new PanelBuilder(myGame, mySkin, this);
@@ -53,7 +47,7 @@ public class TestMain extends Scene implements BrucieListener {
                 .addButton("Two","two")
                 .addButton("Three","three");
 
-        Texture bgtex = myGame.getAssetManager().get("bg.png");
+        Texture bgtex = assetManager.get("bg.png");
         Sprite bg = new Sprite(bgtex);
         Image bgim = new Image(bgtex);
         myStage.addActor(bgim);
@@ -75,8 +69,7 @@ public class TestMain extends Scene implements BrucieListener {
 
     @Override
     public void resize(int screenWidth, int screenHeight) {
-        myStage.getViewport().update(screenWidth,screenHeight);
-
+        myStage.resize(screenWidth,screenHeight);
     }
 
     @Override

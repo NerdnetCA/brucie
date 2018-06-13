@@ -1,5 +1,6 @@
 package ca.nerdnet.brucie.core.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  */
 
 public class Panel extends Table {
+    private static final String TAG = "PANEL";
+
     public static final int ATTACH_NONE = 0;
     public static final int ATTACH_TOP = 1;
     public static final int ATTACH_BOTTOM = 2;
@@ -38,6 +41,7 @@ public class Panel extends Table {
         if(!inited) {
             nominalX = getX();
             nominalY = getY();
+            Gdx.app.log(TAG,"XY :" + nominalX + " " + nominalY);
             busy = false;
             refreshCoords();
             inited=true;
