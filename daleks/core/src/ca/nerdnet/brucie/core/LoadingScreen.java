@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Created by colin on 7/24/17.
+ * As with SplashScreen, it is best to keep out of this and accept that it works. :)
+ *
  */
 
 public class LoadingScreen extends Scene {

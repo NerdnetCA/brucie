@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Created by colin on 7/24/17.
+ * The westower splash/bootstrap scene.
+ *
+ * This is not really documented - best to keep your paws out of here.
+ *
  */
 
 public class SplashScreen extends Scene {
