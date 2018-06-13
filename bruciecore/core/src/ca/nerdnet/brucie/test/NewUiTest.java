@@ -98,7 +98,7 @@ public class NewUiTest extends Scene implements BrucieListener {
             myGame.queueScene("S-TWO");
             done=true;
             return true;
-        } else if("bob".equals(action)) {
+        } else if("btnMain".equals(action)) {
             flingMenu("MAIN");
             return true;
         }

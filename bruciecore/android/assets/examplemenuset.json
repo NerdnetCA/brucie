@@ -4,7 +4,7 @@
     title: Main Menu,
     items: [
       {name: btnSub1,
-      title: SubMenu One},
+      title: SubMenu 1},
       {name: btnPoop,
         title: Poop}
     ]
@@ -13,13 +13,9 @@
     name: SUB1,
     title: SubMenu One,
     items: [
-      {name: bob, title: olgysr}
+      {name: btnMain, title: Back},
+      {name: btnSplode, title: Asplode!},
+      {name: btnDontSplode, title: No Splode}
     ]
-
-
-
   }
-
-
-
 ]
