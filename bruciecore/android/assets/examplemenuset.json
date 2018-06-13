@@ -1,0 +1,25 @@
+[
+  {
+    name: MAIN,
+    title: Main Menu,
+    items: [
+      {name: btnSub1,
+      title: SubMenu One},
+      {name: btnPoop,
+        title: Poop}
+    ]
+  },
+  {
+    name: SUB1,
+    title: SubMenu One,
+    items: [
+      {name: bob, title: olgysr}
+    ]
+
+
+
+  }
+
+
+
+]

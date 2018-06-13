@@ -1,15 +1,15 @@
 [
   {
     name: BEGIN,
-    classname: ca.nerdnet.brucie.test.TestMain,
+    classname: ca.nerdnet.brucie.test.NewUiTest,
   },
   {
     name: S-ONE,
-    classname: ca.nerdnet.brucie.test,
+    classname: ca.nerdnet.brucie.unablox.TerrainTest,
   },
   {
     name: S-TWO,
-    classname: ca.nerdnet.brucie.test.,
+    classname: ca.nerdnet.brucie.unablox.exa.VBOTest2,
   },
   {
     name: S-THREE,
