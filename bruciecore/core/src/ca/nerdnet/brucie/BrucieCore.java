@@ -35,7 +35,7 @@ public class BrucieCore extends BrucieGame {
 		// The core engine uses this to instantiate the Scenes
 		// of your game. Set up the Scenes in the brucie/scenes.json file
 		Wrangler<Scene> w = new Wrangler<Scene>(this);
-		w.setJsonFile(config.scenes_json);
+		w.setJsonFile(config.getSceneConfig());
 		sceneWrangler = w;
 
 		// Set up feature wrangler.

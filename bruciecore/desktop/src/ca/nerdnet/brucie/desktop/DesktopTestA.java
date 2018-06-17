@@ -19,6 +19,7 @@ public class DesktopTestA {
 		// Create BrucieConfig instance. This remains the same across platforms at
 		// this time, but does not need to.
 		BrucieConfig bconfig = new BrucieConfig();
+		bconfig.setSceneConfig("brucie/scenes_testa.json");
 
 		// Create game
 		BrucieCore game = new BrucieCore(bconfig);

@@ -1,0 +1,25 @@
+[
+  {
+    name: MAIN,
+    title: Main Menu,
+    items: [
+      {name: btnTemplate,
+      title: Test Template},
+      {name: btnCubetest,
+        title: Cube Test},
+      {name: btnBasic3d,
+        title: Basic 3d},
+      {name: btnSub1,
+        title: More...}
+    ]
+  },
+  {
+    name: SUB1,
+    title: More Tests,
+    items: [
+      {name: btnMain, title: Back},
+      {name: btnSplode, title: Asplode!},
+      {name: btnDontSplode, title: No Splode}
+    ]
+  }
+]
