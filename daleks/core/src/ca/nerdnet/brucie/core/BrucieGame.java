@@ -6,7 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Created by colin on 7/24/17.
+ * Main game handler.
  */
 
 public class BrucieGame implements ApplicationListener {
@@ -58,6 +58,10 @@ public class BrucieGame implements ApplicationListener {
         myMode = MODE_START;
     }
 
+    /** Queue a scene to be displayed when the current is done.
+     *
+     * @param scenename
+     */
     public void queueScene(String scenename) {
         if(nextScene != null) {
             // This is a problem..
@@ -95,6 +99,7 @@ public class BrucieGame implements ApplicationListener {
 
         switch(myMode) {
             case MODE_START:
+                // Bootstrap mode - display the splash.
                 splash.render(delta);
                 if(assetManager.update() && splash.isDone()) {
                     Gdx.app.log(TAG,"Switching to Normal Mode");
@@ -108,9 +113,11 @@ public class BrucieGame implements ApplicationListener {
                 }
                 break;
             case MODE_NORMAL:
+                // Normal running mode.
                 currentScene.render(delta);
                 break;
             case MODE_PRELOAD:
+                // Normal running with a queued scene that may still be loading assets.
                 currentScene.render(delta);
                 if(assetManager.update()) {
                     if(currentScene.isDone()) {
@@ -122,12 +129,15 @@ public class BrucieGame implements ApplicationListener {
                         currentScene.show();
                         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     } else {
+                        // When loading is done, switch to CUE
                         Gdx.app.log(TAG,"Switching to CUE Mode");
                         myMode=MODE_CUE;
                     }
                 }
                 break;
             case MODE_CUE:
+                // Next scene is queued up and we are just waiting for the
+                // current one to finish.
                 currentScene.render(delta);
                 if(currentScene.isDone()) {
                     Gdx.app.log(TAG,"CUE Triggered, switching to normal");
@@ -140,6 +150,8 @@ public class BrucieGame implements ApplicationListener {
                 }
                 break;
             case MODE_LOADING:
+                // The current scene is done, but the next one is not done
+                // loading assets - display loading screen.
                 currentScene.render(delta);
                 if(assetManager.update()) {
                     Gdx.app.log(TAG,"Loading done - Switching to Normal Mode");
@@ -156,6 +168,8 @@ public class BrucieGame implements ApplicationListener {
     @Override
     public void dispose () {
         if (currentScene != null) currentScene.hide();
+        // Do we need to do either of these?
+        //if (assetManager != null) assetManager.dispose();
         //if (nextScene != null) nextScene.hide();
     }
 

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ObjectMap;
 
 /**
- * Created by colin on 7/25/17.
+ * Wrangler for singleton classes.
  */
 
 public class SingletonWrangler<T> extends Wrangler<T> {
