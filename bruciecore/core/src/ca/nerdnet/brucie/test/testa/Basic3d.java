@@ -3,17 +3,24 @@ package ca.nerdnet.brucie.test.testa;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.Renderable;
+import com.badlogic.gdx.graphics.g3d.RenderableProvider;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 
 import ca.nerdnet.brucie.core.*;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
 
-public class Basic3d extends Scene implements BrucieListener {
+public class Basic3d extends Scene implements BrucieListener, RenderableProvider {
     private static final String TAG = "BASIC3D";
 
     private boolean done=false;
@@ -22,9 +29,13 @@ public class Basic3d extends Scene implements BrucieListener {
     private PerspectiveCamera camera;
     private ShaderProgram shader;
     private Mesh myMesh;
+    private Material greenMaterial;
+    private ModelBatch modelBatch;
 
     @Override
     public void dispose() {
+        if(shader != null) shader.dispose();
+        if(modelBatch != null) modelBatch.dispose();
         if(myUiStage != null) myUiStage.dispose();
         if(myMesh != null) myMesh.dispose();
         super.dispose();
@@ -43,25 +54,25 @@ public class Basic3d extends Scene implements BrucieListener {
         Actor a = makeBackButton();
         myUiStage.addActor(a);
 
-        shader = new ShaderProgram(
+        greenMaterial = new Material(ColorAttribute.createDiffuse(Color.GREEN));
+
+        /*shader = new ShaderProgram(
                 Gdx.files.internal("testa/default_vshad.glsl").readString(),
                 Gdx.files.internal("testa/default_fshad.glsl").readString()
         );
-        shader.pedantic = false;
+        shader.pedantic = false;*/
         myMesh = new Mesh(true, 3, 3,
-                new VertexAttribute(
-                        VertexAttributes.Usage.Position,
-                        3,
-                        "a_Position")
+                VertexAttribute.Position()
         );
         short[] indices = {0,1,2};
         float[] vertices = {
                 0f,0f,0f,
                 1f,0f,0f,
-                1f,0f,1f
+                1f,0f,-1f,
         };
         myMesh.setVertices(vertices);
         myMesh.setIndices(indices);
+
 
         /*MeshBuilder mb = new MeshBuilder();
         VertexAttributes vats = new VertexAttributes(new VertexAttribute(
@@ -74,11 +85,13 @@ public class Basic3d extends Scene implements BrucieListener {
         myMesh = mb.end();*/
 
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(10f,10f,10f);
+        camera.position.set(2f,2f,2f);
         camera.lookAt(0f,0f,0f);
         camera.near = 0.1f;
         camera.far = 50f;
         camera.update();
+
+        modelBatch = new ModelBatch();
 
     }
 
@@ -88,11 +101,9 @@ public class Basic3d extends Scene implements BrucieListener {
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        shader.begin();
-        shader.setUniformMatrix("u_matViewProj",camera.combined);
-        myMesh.render(shader, GL20.GL_TRIANGLES);
-        shader.end();
-        Gdx.gl20.glFlush();
+        modelBatch.begin(camera);
+        modelBatch.render(this);
+        modelBatch.end();
 
         myUiStage.act(delta);
         myUiStage.draw();
@@ -114,7 +125,7 @@ public class Basic3d extends Scene implements BrucieListener {
 
     }
 
-    private Table makeBackButton(){
+    private Table makeBackButton() {
         Table t = new Table(mySkin);
         t.pad(20);
         t.setFillParent(true);
@@ -141,5 +152,16 @@ public class Basic3d extends Scene implements BrucieListener {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void getRenderables(Array<Renderable> renderables, Pool<Renderable> pool) {
+        Renderable renderable = pool.obtain();
+        renderable.material = greenMaterial;
+        renderable.meshPart.mesh = myMesh;
+        renderable.meshPart.offset = 0;
+        renderable.meshPart.size = 3;
+        renderable.meshPart.primitiveType = GL20.GL_TRIANGLES;
+        renderables.add(renderable);
     }
 }
