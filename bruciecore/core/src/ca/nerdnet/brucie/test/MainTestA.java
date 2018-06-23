@@ -100,6 +100,10 @@ public class MainTestA extends Scene implements BrucieListener {
         } else if("btnSub1".equals(action)) {
             flingMenu("SUB1");
             return true;
+        } else if("btnGround".equals(action)) {
+            myGame.queueScene("S-GROUND");
+            done=true;
+            return true;
         }
         return false;
     }

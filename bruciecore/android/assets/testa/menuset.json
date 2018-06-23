@@ -17,9 +17,8 @@
     name: SUB1,
     title: More Tests,
     items: [
-      {name: btnMain, title: Back},
-      {name: btnSplode, title: Asplode!},
-      {name: btnDontSplode, title: No Splode}
+      {name: btnMain, title: Back...},
+      {name: btnGround, title: Terrain}
     ]
   }
 ]

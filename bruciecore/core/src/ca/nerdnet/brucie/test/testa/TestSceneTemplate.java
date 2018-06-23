@@ -44,12 +44,12 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
 
     @Override
     public void render(float delta) {
+        // Clear the 'screen'.  Remember to clear the depth buffer when rendering 3d
         Gdx.gl20.glClearColor(0,0,0,1);
-        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         myUiStage.act(delta);
         myUiStage.draw();
-
     }
 
     @Override

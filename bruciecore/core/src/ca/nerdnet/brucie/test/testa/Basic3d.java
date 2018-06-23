@@ -3,13 +3,17 @@ package ca.nerdnet.brucie.test.testa;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
@@ -31,6 +35,10 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
     private Mesh myMesh;
     private Material greenMaterial;
     private ModelBatch modelBatch;
+    private Matrix4 mySpin;
+    private Vector3 vUp;
+    private Environment environment;
+    private DirectionalLight myLight;
 
     @Override
     public void dispose() {
@@ -54,21 +62,23 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
         Actor a = makeBackButton();
         myUiStage.addActor(a);
 
-        greenMaterial = new Material(ColorAttribute.createDiffuse(Color.GREEN));
+        greenMaterial = new Material(ColorAttribute.createDiffuse(Color.RED));
 
         /*shader = new ShaderProgram(
                 Gdx.files.internal("testa/default_vshad.glsl").readString(),
                 Gdx.files.internal("testa/default_fshad.glsl").readString()
         );
         shader.pedantic = false;*/
-        myMesh = new Mesh(true, 3, 3,
+        myMesh = new Mesh(true, 4, 6,
                 VertexAttribute.Position()
         );
-        short[] indices = {0,1,2};
+        short[] indices = {0,1,2,2,3,0};
         float[] vertices = {
-                0f,0f,0f,
+                0f,0.2f,0f,
                 1f,0f,0f,
                 1f,0f,-1f,
+                0f,0f,-1f
+
         };
         myMesh.setVertices(vertices);
         myMesh.setIndices(indices);
@@ -91,8 +101,17 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
         camera.far = 50f;
         camera.update();
 
+        myLight = new DirectionalLight();
+        myLight.set(0.6f,0.6f,0.6f,-0.2f,-1f,-0.4f);
+
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, .1f, .1f, .1f, .1f));
+        environment.add(myLight);
+
         modelBatch = new ModelBatch();
 
+        mySpin = new Matrix4();
+        vUp = new Vector3(0,1,0);
     }
 
     @Override
@@ -101,8 +120,10 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
+        mySpin.rotate(vUp, 25*delta);
+
         modelBatch.begin(camera);
-        modelBatch.render(this);
+        modelBatch.render(this,environment);
         modelBatch.end();
 
         myUiStage.act(delta);
@@ -158,9 +179,10 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
     public void getRenderables(Array<Renderable> renderables, Pool<Renderable> pool) {
         Renderable renderable = pool.obtain();
         renderable.material = greenMaterial;
+        renderable.worldTransform.set(mySpin);
         renderable.meshPart.mesh = myMesh;
         renderable.meshPart.offset = 0;
-        renderable.meshPart.size = 3;
+        renderable.meshPart.size = 6;
         renderable.meshPart.primitiveType = GL20.GL_TRIANGLES;
         renderables.add(renderable);
     }

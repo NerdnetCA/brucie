@@ -12,6 +12,10 @@
     classname: ca.nerdnet.brucie.test.testa.TestSceneTemplate,
   },
   {
+    name: S-GROUND,
+    classname: ca.nerdnet.brucie.test.testa.GroundMesh,
+  },
+  {
     name: S-CUBE,
     classname: ca.nerdnet.brucie.test.testa.CubeTest,
   }
