@@ -28,13 +28,19 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
     private static final String TAG = "BASIC3D";
 
     private boolean done=false;
+
+    // Managed assets
     private Skin mySkin;
+
+    // Disposables
     private UiStage myUiStage;
-    private PerspectiveCamera camera;
     private ShaderProgram shader;
     private Mesh myMesh;
-    private Material greenMaterial;
     private ModelBatch modelBatch;
+
+    // Other
+    private PerspectiveCamera camera;
+    private Material greenMaterial;
     private Matrix4 mySpin;
     private Vector3 vUp;
     private Environment environment;
@@ -42,6 +48,7 @@ public class Basic3d extends Scene implements BrucieListener, RenderableProvider
 
     @Override
     public void dispose() {
+        // Always dispose your disposables
         if(shader != null) shader.dispose();
         if(modelBatch != null) modelBatch.dispose();
         if(myUiStage != null) myUiStage.dispose();

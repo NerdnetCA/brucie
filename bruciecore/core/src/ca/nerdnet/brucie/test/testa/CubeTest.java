@@ -21,17 +21,24 @@ public class CubeTest extends Scene implements BrucieListener {
     private static final String TAG = "BASIC3D";
 
     private boolean done=false;
+
+    // Managed assets
     private Skin mySkin;
+
+    // Disposables
     private UiStage myUiStage;
-    private PerspectiveCamera camera;
     private Model model;
-    private ModelInstance instance;
     private ModelBatch modelBatch;
+
+    // Other
+    private ModelInstance instance;
+    private PerspectiveCamera camera;
     private Environment environment;
     private Vector3 vUp = new Vector3(0f,1f,0f);
 
     @Override
     public void dispose() {
+        // Always dispose your disposables
         if(model != null) model.dispose();
         if(myUiStage != null) myUiStage.dispose();
         if(modelBatch != null) modelBatch.dispose();

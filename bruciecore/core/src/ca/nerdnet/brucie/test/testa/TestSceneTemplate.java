@@ -9,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
-import ca.nerdnet.brucie.core.BrucieEvent;
-import ca.nerdnet.brucie.core.BrucieListener;
-import ca.nerdnet.brucie.core.Scene;
+import ca.nerdnet.brucie.core.*;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
 
@@ -19,11 +17,16 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
     private static final String TAG = "BASIC3D";
 
     private boolean done=false;
+
+    // Managed Assets
     private Skin mySkin;
+
+    // Disposables
     private UiStage myUiStage;
 
     @Override
     public void dispose() {
+        // Always dispose your disposables
         if(myUiStage != null) myUiStage.dispose();
         super.dispose();
     }

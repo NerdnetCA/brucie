@@ -28,22 +28,36 @@ import ca.nerdnet.brucie.core.ui.UiStage;
 
 public class GroundMesh extends Scene implements BrucieListener, RenderableProvider {
     private static final String TAG = "BASIC3D";
+
+    // Camera settings
     private static final float FOV = 67;
     private static final float CAM_X = 10f;
     private static final float CAM_Y = 10f;
     private static final float CAM_Z = 10f;
 
+    // Terrain mesh size
     private static final int MESH_X = 9;
     private static final int MESH_Z = 9;
+
+    // floats per vertex
     private static final int VERTEX_SIZE = 6;
 
+    // vertices per terrain quadrangle
+    // This is 6 because 2 triangles * 3 verts each
+    private static final int QUAD_SIZE = 6;
 
     private boolean done=false;
+
+    // Managed assets
     private Skin mySkin;
+
+    // Disposables
     private UiStage myUiStage;
-    private Material groundMaterial;
     private Mesh groundMesh;
     private ModelBatch modelBatch;
+
+    // Other
+    private Material groundMaterial;
     private PerspectiveCamera camera;
     private float[] cachedVertices;
     private short[] cachedIndices;
@@ -51,6 +65,7 @@ public class GroundMesh extends Scene implements BrucieListener, RenderableProvi
 
     @Override
     public void dispose() {
+        // Always dispose your disposables
         if(myUiStage != null) myUiStage.dispose();
         if(groundMesh != null) groundMesh.dispose();
         if(modelBatch != null) modelBatch.dispose();
@@ -89,7 +104,7 @@ public class GroundMesh extends Scene implements BrucieListener, RenderableProvi
         cachedIndices = new short[
                 (MESH_X -1) *
                 (MESH_Z-1) *
-                6
+                QUAD_SIZE
             ];
 
         groundMesh = buildMesh();
@@ -101,15 +116,17 @@ public class GroundMesh extends Scene implements BrucieListener, RenderableProvi
         Mesh mesh;
 
         int numverts=0;
+        int iverts=0;
         int numindices=0;
         for(int mz=0; mz<MESH_Z; mz++) {
             for(int mx=0; mx<MESH_X; mx++) {
-                cachedVertices[numverts++] = mx;
-                cachedVertices[numverts++] = 0f;
-                cachedVertices[numverts++] = mz;
-                cachedVertices[numverts++] = 0f;
-                cachedVertices[numverts++] = 1f;
-                cachedVertices[numverts++] = 0f;
+                cachedVertices[iverts++] = mx;
+                cachedVertices[iverts++] = 0f;
+                cachedVertices[iverts++] = mz;
+                cachedVertices[iverts++] = 0f;
+                cachedVertices[iverts++] = 1f;
+                cachedVertices[iverts++] = 0f;
+                numverts++;
             }
         }
         for(int mz=0; mz<MESH_Z-1; mz++) {
