@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
@@ -18,11 +21,26 @@ import java.util.Iterator;
 public abstract class Scene implements Screen, WrangledObject {
     private static final String TAG = "SCENE";
 
-    // Scene class helps track asset loading.
-    private Array<String> assetList;
+
+    public static final float WIPE_TIME = 0.9f;
+    private static final int WIPE_FADEIN = 1;
+    private static final int WIPE_FADEOUT = 2;
+
+    protected boolean isWiping;
+    protected boolean done;
 
     protected BrucieGame myGame;
     protected AssetManager assetManager;
+
+    // helps track asset loading.
+    private Array<String> assetList;
+
+    private ShapeRenderer fadeRenderer;
+    private OrthographicCamera mCamera;
+    private float mWidth=256f, mHeight=256f;
+    private float wipeSpeedFactor;
+    private float wipeTime;
+    private int wipeType;
 
     /**
      * From WrangledObject.
@@ -36,11 +54,10 @@ public abstract class Scene implements Screen, WrangledObject {
     }
 
     /** Scenes are generally allowed to run until isDone returns false.
-     * Therefore, you must override this if you ever want the scene to end.
      * @return
      */
     public boolean isDone() {
-        return true;
+        return done;
     }
 
     /** preload is called to allow the scene to queue up asset loads.
@@ -90,4 +107,74 @@ public abstract class Scene implements Screen, WrangledObject {
     public void hide() {
         dispose();
     }
+
+    public void show() {
+        wipeSpeedFactor = 1f/WIPE_TIME;
+        mCamera = new OrthographicCamera();
+        mCamera.setToOrtho(false,mWidth,mHeight);
+        mCamera.update();
+        fadeRenderer = new ShapeRenderer();
+    }
+
+    public void resize(int screenWidth, int screenHeight) {
+        //mCamera.update(); // Is this needed??
+    }
+
+    /** Call this supermethod at the end of your overriding method.
+     *
+     * @param delta
+     */
+    public void render(float delta) {
+        // Render the wipe
+        if (isWiping) {
+            // Update timing
+            wipeTime += (delta * wipeSpeedFactor);
+            if (wipeTime > 1f) {
+                wipeTime = 1f;
+                isWiping = false;
+                done = true; // this should be removed in favour of a better way.
+            }
+
+            // Render the wipe
+            float fadeAmount;
+
+            switch (wipeType) {
+                case WIPE_FADEIN:
+                    fadeAmount = 1f - wipeTime;
+                    break;
+                case WIPE_FADEOUT:
+                default:
+                    fadeAmount = wipeTime;
+                    break;
+            }
+
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            fadeRenderer.setProjectionMatrix(mCamera.combined);
+            fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            fadeRenderer.setColor(0f, 0f, 0f, fadeAmount);
+            fadeRenderer.rect(0f, 0f, mWidth, mHeight);
+            fadeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+
+        }
+    }
+
+
+    public void setFadeIn() {
+        if(!isWiping) {
+            isWiping=true;
+            wipeTime = 0f;
+            wipeType = WIPE_FADEIN;
+        }
+    }
+
+    public void setFadeOut() {
+        if(!isWiping) {
+            isWiping=true;
+            wipeTime = 0f;
+            wipeType = WIPE_FADEOUT;
+        }
+    }
+
 }

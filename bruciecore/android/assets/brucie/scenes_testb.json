@@ -1,0 +1,10 @@
+[
+  {
+    name: BEGIN,
+    classname: ca.nerdnet.brucie.test.MainTestB,
+  },
+  {
+    name: S-BASIC,
+    classname: ca.nerdnet.brucie.test.testb.BasicShaderTest,
+  }
+]
