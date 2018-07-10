@@ -38,11 +38,14 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
 
     @Override
     public void show() {
+        super.show();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
         myUiStage = new UiStage();
 
         Actor a = makeBackButton();
         myUiStage.addActor(a);
+
+        setFadeIn();
     }
 
     @Override
@@ -53,10 +56,13 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
 
         myUiStage.act(delta);
         myUiStage.draw();
+
+        super.render(delta);
     }
 
     @Override
     public void resize(int width, int height) {
+        super.resize(width,height);
         myUiStage.resize(width,height);
     }
 
@@ -85,14 +91,12 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
     }
 
     @Override
-    public boolean isDone() { return done; }
-    @Override
     public boolean onEvent(BrucieEvent e) {
         String action = e.tag;
         Gdx.app.log(TAG,"CLICK :"+action);
         if("back".equals(action)) {
             myGame.queueScene("BEGIN");
-            done=true;
+            setFadeOut();
             return true;
         }
         return false;
