@@ -19,7 +19,6 @@ public class MainTestB extends Scene implements BrucieListener {
 
     private static final float MENUFLINGSPEED = 0.35f;
 
-    private boolean done=false;
     private Skin mySkin;
     private UiStage myStage;
     private MenuSet menuSet;
@@ -38,6 +37,7 @@ public class MainTestB extends Scene implements BrucieListener {
 
     @Override
     public void show() {
+        super.show();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
         myStage = new UiStage();
 
@@ -58,10 +58,13 @@ public class MainTestB extends Scene implements BrucieListener {
 
         myStage.act(delta);
         myStage.draw();
+
+        super.render(delta);
     }
 
     @Override
     public void resize(int width, int height) {
+        super.resize(width,height);
         myStage.resize(width,height);
     }
 
@@ -76,9 +79,6 @@ public class MainTestB extends Scene implements BrucieListener {
     }
 
     @Override
-    public boolean isDone() { return done; }
-
-    @Override
     public boolean onEvent(BrucieEvent e) {
         String action = e.tag;
         Gdx.app.log(TAG,"CLICK :"+action);
@@ -87,22 +87,22 @@ public class MainTestB extends Scene implements BrucieListener {
             return true;
         } else if("btnBasic".equals(action)) {
             myGame.queueScene("S-BASIC");
-            done=true;
+            setFadeOut();
             return true;
         } else if("btnTemplate".equals(action)) {
             myGame.queueScene("S-TEMPLATE");
-            done=true;
+            setFadeOut();
             return true;
-        } else if("btnCubetest".equals(action)) {
-            myGame.queueScene("S-CUBE");
-            done=true;
+        } else if("btnVoxshad".equals(action)) {
+            myGame.queueScene("S-VOXSHAD");
+            setFadeOut();
             return true;
         } else if("btnSub1".equals(action)) {
             flingMenu("SUB1");
             return true;
         } else if("btnGround".equals(action)) {
             myGame.queueScene("S-GROUND");
-            done=true;
+            setFadeOut();
             return true;
         }
         return false;

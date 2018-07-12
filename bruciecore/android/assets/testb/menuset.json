@@ -5,9 +5,9 @@
     items: [
       {name: btnBasic,
       title: Basic 3d Shader},
-      {name: btnCubetest,
-        title: Cube Test},
-      {name: btnBasic3d,
+      {name: btnVoxshad,
+        title: Voxely Shader},
+      {name: btnVtsr,
         title: Basic 3d},
       {name: btnSub1,
         title: More...}

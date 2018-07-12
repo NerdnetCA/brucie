@@ -130,9 +130,10 @@ public abstract class Scene implements Screen, WrangledObject {
             // Update timing
             wipeTime += (delta * wipeSpeedFactor);
             if (wipeTime > 1f) {
+                Gdx.app.log(TAG,"Wipe done.");
                 wipeTime = 1f;
                 isWiping = false;
-                done = true; // this should be removed in favour of a better way.
+                if(wipeType == WIPE_FADEOUT) done = true; // this should be removed in favour of a better way.
             }
 
             // Render the wipe

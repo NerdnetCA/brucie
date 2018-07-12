@@ -6,5 +6,9 @@
   {
     name: S-BASIC,
     classname: ca.nerdnet.brucie.test.testb.BasicShaderTest,
+  },
+  {
+    name: S-VOXSHAD,
+    classname: ca.nerdnet.brucie.test.testb.ShaderTestBTwo,
   }
 ]
