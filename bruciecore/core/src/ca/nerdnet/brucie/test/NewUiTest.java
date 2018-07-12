@@ -42,6 +42,7 @@ public class NewUiTest extends Scene implements BrucieListener {
 
     @Override
     public void show() {
+        super.show();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
 
         myStage = new UiStage();
@@ -64,10 +65,12 @@ public class NewUiTest extends Scene implements BrucieListener {
         myStage.act(delta);
         myStage.draw();
 
+        super.render(delta);
     }
 
     @Override
     public void resize(int screenWidth, int screenHeight) {
+        super.resize(screenWidth,screenHeight);
         myStage.resize(screenWidth,screenHeight);
     }
 
@@ -82,9 +85,6 @@ public class NewUiTest extends Scene implements BrucieListener {
     }
 
     @Override
-    public boolean isDone() { return done; }
-
-    @Override
     public boolean onEvent(BrucieEvent e) {
         String action = e.tag;
         Gdx.app.log(TAG,"CLICK :"+action);
@@ -93,7 +93,7 @@ public class NewUiTest extends Scene implements BrucieListener {
             return true;
         } else if("poop".equals(action)) {
             myGame.queueScene("S-TWO");
-            done=true;
+            setFadeOut();
             return true;
         } else if("btnMain".equals(action)) {
             flingMenu("MAIN");

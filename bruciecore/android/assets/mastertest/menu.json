@@ -1,0 +1,32 @@
+[
+  {
+    name: MAIN,
+    title: Main Menu,
+    items: [
+      {name: btn_test2d,
+      title: "2D Tests"},
+      {name: btn_test3d,
+        title: "3D Tests"}
+    ]
+  },
+  {
+    name: SUB_2D,
+    title: "2D Tests",
+    items: [
+      {name: btn_main, title: "<--Back"},
+      {name: btn_basic2d, title: Sprites},
+      {name: btn_ts, title: ??},
+      {name: btn_tilemap, title: Tiled Maps}
+    ]
+  },
+  {
+    name: SUB_3D,
+    title: "3D Tests",
+    items: [
+      {name: btn_main, title: "<--Back"},
+      {name: btn_Splode, title: Asplode!},
+      {name: btn_DontSplode, title: No Splode}
+    ]
+  }
+
+]
