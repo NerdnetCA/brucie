@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
@@ -90,7 +91,7 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
         chunkMesh.calculateVertices(vchunk.voxels);
 
 
-        renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED, 1));
+        renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED, 0));
 
 
         mCamera = new PerspectiveCamera(67,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -110,7 +111,7 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
         mRenderable.environment = env;
         mRenderable.worldTransform.idt();
 
-        mRenderable.material = new Material(TextureAttribute.createDiffuse(mTex));
+        mRenderable.material = new Material();
         mRenderable.meshPart.mesh = chunkMesh;
         mRenderable.meshPart.offset = 0;
         mRenderable.meshPart.size = chunkMesh.getNumIndices();
@@ -120,7 +121,6 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
 
         shader = new ShaderB2();
         shader.init();
-
 
         Actor a = makeBackButton();
         myUiStage.addActor(a);
@@ -138,17 +138,14 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
 
 
         renderContext.begin();
-        //renderContext.textureBinder.begin();
-        //renderContext.textureBinder.bind(
-        //        mTex
-        //);
+        renderContext.textureBinder.bind(
+                mTex
+        );
 
         shader.begin(mCamera,renderContext);
-        mTex.bind(0);
         shader.render(mRenderable);
         shader.end();
 
-        //renderContext.textureBinder.end();
         renderContext.end();
 
 

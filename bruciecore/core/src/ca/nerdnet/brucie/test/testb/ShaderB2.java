@@ -59,6 +59,7 @@ public class ShaderB2 implements Shader {
     public void render(Renderable renderable) {
         program.setUniformMatrix(u_worldTrans, renderable.worldTransform);
         program.setUniformi(u_texture, 0);
+        renderable.material.ge
         renderable.meshPart.render(program);
     }
 
