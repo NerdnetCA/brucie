@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Disposable;
 
-public class ChunkMesh extends Mesh {
-    private static final int VERTEX_SIZE = 8;
+public class ChunkMesh2 {
+    private static final int VERTEX_SIZE = 8 ;
+    private static final short TILES_DIM = 16;
 
     private final int width, height, depth;
 
@@ -24,18 +24,10 @@ public class ChunkMesh extends Mesh {
     private short[] mIndices;
 
     private int mNumIndices=0;
+    private Mesh mMesh;
+    private int mNumVertices;
 
-    public ChunkMesh(int width, int height, int depth){
-        super(
-                true,
-                width * height * depth * 6 * 4 / 2,
-                width * height * depth * 6 * 6 / 2,
-                new VertexAttribute(VertexAttributes.Usage.Position, 3, "a_position"),
-                new VertexAttribute(VertexAttributes.Usage.Normal,
-                        3, "a_normal"),
-                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates,
-                        2,"a_texCoord")
-        );
+    public ChunkMesh2(int width, int height, int depth){
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -47,6 +39,27 @@ public class ChunkMesh extends Mesh {
         this.frontOffset = -width;
         this.backOffset = width;
 
+    }
+
+    public Mesh getMesh(short[] voxels) {
+        Mesh rv = null;
+
+        mNumVertices = calculateVertices(voxels);
+        rv = new Mesh (
+                true,
+                //mNumVertices,
+                width * height * depth * 6 * 4 / 2,
+                //mNumIndices,
+                width * height * depth * 6 * 6 / 2,
+                new VertexAttribute(VertexAttributes.Usage.Position, 3, "a_position"),
+                new VertexAttribute(VertexAttributes.Usage.Normal,
+                        3, "a_normal"),
+                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates,
+                        2,"a_texCoord")
+        );
+        rv.setVertices(mVertices);
+        rv.setIndices(mIndices);
+        return rv;
     }
 
     public int getMaxVerts() {
@@ -77,7 +90,7 @@ public class ChunkMesh extends Mesh {
         }
         mNumIndices = 0;
         int i = 0;
-        int vertexOffset = 0;
+        int vOff = 0;
         for (int y = 0; y < height; y++) {
             for (int z = 0; z < depth; z++) {
                 for (int x = 0; x < width; x++, i++) {
@@ -85,55 +98,67 @@ public class ChunkMesh extends Mesh {
                     if (voxel == 0) continue;
 
                     if (y < height - 1) {
-                        if (voxels[i + topOffset] == 0) vertexOffset = createTop(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + topOffset] == 0)
+                            vOff = createTop(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createTop(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createTop(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
                     if (y > 0) {
-                        if (voxels[i + bottomOffset] == 0) vertexOffset = createBottom(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + bottomOffset] == 0)
+                            vOff = createBottom(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createBottom(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createBottom(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
                     if (x > 0) {
-                        if (voxels[i + leftOffset] == 0) vertexOffset = createLeft(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + leftOffset] == 0)
+                            vOff = createLeft(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createLeft(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createLeft(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
 
                     if (x < width - 1) {
-                        if (voxels[i + rightOffset] == 0) vertexOffset = createRight(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + rightOffset] == 0)
+                            vOff = createRight(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createRight(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createRight(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
                     if (z > 0) {
-                        if (voxels[i + frontOffset] == 0) vertexOffset = createFront(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + frontOffset] == 0)
+                            vOff = createFront(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createFront(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createFront(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
                     if (z < depth - 1) {
-                        if (voxels[i + backOffset] == 0) vertexOffset = createBack(offset, x, y, z, mVertices, vertexOffset);
+                        if (voxels[i + backOffset] == 0)
+                            vOff = createBack(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     } else {
-                        vertexOffset = createBack(offset, x, y, z, mVertices, vertexOffset);
+                        vOff = createBack(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
                     }
                 }
             }
         }
 
-        setVertices(mVertices);
-        setIndices(mIndices,0,mNumIndices);
-
-        return vertexOffset / VERTEX_SIZE;
+        return vOff / VERTEX_SIZE;
     }
 
-    public int createTop (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createTop (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM ;
+        v0 = ((float)texY) / TILES_DIM ;
+        u1 = ((float)(texX+1)) / TILES_DIM;
+        v1 = ((float)(texY+1)) / TILES_DIM;
+
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
         vertices[vertexOffset++] = offset.z + z;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -141,8 +166,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f / 8f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -150,8 +175,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f / 8f;
-        vertices[vertexOffset++] = 1.0f / 8f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -159,23 +184,32 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 1.0f / 8f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
 
-    public int createBottom (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createBottom (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM ;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM;
+        v0 = ((float)texY) / TILES_DIM;
+        u1 = ((float)(texX+1)) / TILES_DIM ;
+        v1 = ((float)(texY+1)) / TILES_DIM ;
+
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
         vertices[vertexOffset++] = offset.z + z;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = u0;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
@@ -183,8 +217,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
@@ -192,8 +226,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
@@ -201,23 +235,32 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
 
-    public int createLeft (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createLeft (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM ;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM ;
+        v0 = ((float)texY) / TILES_DIM ;
+        u1 = ((float)(texX+1)) / TILES_DIM ;
+        v1 = ((float)(texY+1)) / TILES_DIM ;
+
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
         vertices[vertexOffset++] = offset.z + z;
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f / 8f;
-        vertices[vertexOffset++] = 2.0f / 8f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -225,8 +268,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f / 8f;
-        vertices[vertexOffset++] = 1.0f / 8f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -234,8 +277,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 2.0f / 8f;
-        vertices[vertexOffset++] = 1.0f / 8f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
@@ -243,23 +286,32 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = -1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 2.0f / 8f;
-        vertices[vertexOffset++] = 2.0f / 8f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
 
-    public int createRight (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createRight (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM ;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM ;
+        v0 = ((float)texY) / TILES_DIM ;
+        u1 = ((float)(texX+1)) / TILES_DIM ;
+        v1 = ((float)(texY+1)) / TILES_DIM ;
+
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
         vertices[vertexOffset++] = offset.z + z;
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
@@ -267,8 +319,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -276,8 +328,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -285,23 +337,32 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
 
-    public int createFront (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createFront (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM ;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM ;
+        v0 = ((float)texY) / TILES_DIM ;
+        u1 = ((float)(texX+1)) / TILES_DIM ;
+        v1 = ((float)(texY+1)) / TILES_DIM ;
+
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
         vertices[vertexOffset++] = offset.z + z;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
@@ -309,8 +370,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -318,8 +379,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -327,23 +388,32 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 1;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
 
-    public int createBack (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
+    public int createBack (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset, short texNum) {
+        float u0,v0,u1,v1;
+        int texX = texNum % TILES_DIM ;
+        int texY = texNum / TILES_DIM ;
+
+        u0 = ((float)texX) / TILES_DIM ;
+        v0 = ((float)texY) / TILES_DIM ;
+        u1 = ((float)(texX+1)) / TILES_DIM ;
+        v1 = ((float)(texY+1)) / TILES_DIM ;
+
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y;
         vertices[vertexOffset++] = offset.z + z + 1;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v1;
 
         vertices[vertexOffset++] = offset.x + x;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -351,8 +421,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
-        vertices[vertexOffset++] = 0.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u0;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y + 1;
@@ -360,8 +430,8 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 0.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v0;
 
         vertices[vertexOffset++] = offset.x + x + 1;
         vertices[vertexOffset++] = offset.y + y;
@@ -369,13 +439,12 @@ public class ChunkMesh extends Mesh {
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = 0;
         vertices[vertexOffset++] = -1;
-        vertices[vertexOffset++] = 1.0f;
-        vertices[vertexOffset++] = 1.0f;
+        vertices[vertexOffset++] = u1;
+        vertices[vertexOffset++] = v1;
 
         mNumIndices += 6;
 
         return vertexOffset;
     }
-
 
 }

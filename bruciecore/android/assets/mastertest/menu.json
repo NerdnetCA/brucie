@@ -24,8 +24,15 @@
     title: "3D Tests",
     items: [
       {name: btn_main, title: "<--Back"},
-      {name: btn_Splode, title: Asplode!},
-      {name: btn_DontSplode, title: No Splode}
+      {name: btn_tovox, title: "Voxel Tests"},
+      {name: btn_tristrip, title: "TriStrips"}
+    ]
+  },
+  { name: SUB_VOX,
+    title: "Voxel Tests",
+    items: [
+      {name: btn_voxal, title: Voxals},
+      {name: btn_voxal2, title: Voxals2}
     ]
   }
 

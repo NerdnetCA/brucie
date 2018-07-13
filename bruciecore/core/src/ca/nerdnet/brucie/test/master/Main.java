@@ -98,6 +98,21 @@ public class Main extends Scene implements BrucieListener {
             myGame.queueScene("TILEMAP");
             setFadeOut();
             return true;
+        } else if("btn_voxal".equals(action)) {
+            myGame.queueScene("VOXAL");
+            setFadeOut();
+            return true;
+        } else if("btn_voxal2".equals(action)) {
+            myGame.queueScene("VOXAL2");
+            setFadeOut();
+            return true;
+        } else if("btn_tovoxal".equals(action)) {
+            flingMenu("SUB_VOX");
+            return true;
+        } else if("btn_tristrip".equals(action)) {
+            myGame.queueScene("TRISTRIP");
+            setFadeOut();
+            return true;
         } else if("btn_main".equals(action)) {
             flingMenu("MAIN");
             return true;

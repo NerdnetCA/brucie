@@ -1,7 +1,13 @@
-package ca.nerdnet.brucie.test.master;
+package ca.nerdnet.brucie.colin;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.VertexAttribute;
+import com.badlogic.gdx.graphics.VertexAttributes;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,19 +21,28 @@ import ca.nerdnet.brucie.core.Scene;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
 
-public class TestSceneTemplate extends Scene implements BrucieListener {
-    private static final String TAG = "** REPLACE THIS MESSAGE ***";
+public class TriangleStripTest extends Scene implements BrucieListener {
+    private static final String TAG = "TRIANGLESTRIPTEST";
 
     // Managed Assets
     private Skin mySkin;
 
     // Disposables
     private UiStage myUiStage;
+    private float[] vertices;
+    private short[] indices;
+    private Mesh mMesh;
+    private Renderable mRenderable;
+    private ModelBatch modelBatch;
+    private PerspectiveCamera mCamera;
+
 
     @Override
     public void dispose() {
         // Always dispose your disposables
         if(myUiStage != null) myUiStage.dispose();
+        if(mMesh != null) mMesh.dispose();
+        if(modelBatch != null) modelBatch.dispose();
         super.dispose();
     }
 
@@ -42,8 +57,41 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
         myUiStage = new UiStage();
 
+        mCamera = new PerspectiveCamera(67,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        mCamera.position.set(4f,4f,4f);
+        mCamera.lookAt(0,0,0);
+        mCamera.near = 0.2f;
+        mCamera.far = 300f;
+        mCamera.update();
+
+
+        vertices = new float[] {
+                0,0,0, 0,0,
+                0,0,1,
+                1,0,0,
+                1,0,1
+        };
+        indices = new short[] {
+                0,1,2,3
+        };
+
+        mMesh = new Mesh(true,4*3,4,
+                new VertexAttribute(VertexAttributes.Usage.Position,3,"a_position"),
+                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, "a_texCoords")
+
+        );
+        mMesh.setVertices(vertices);
+
+        mRenderable = new Renderable();
+        mRenderable.meshPart.mesh = mMesh;
+        mRenderable.meshPart.offset = 0;
+        mRenderable.meshPart.size = 4;
+        mRenderable.meshPart.primitiveType = GL20.GL_TRIANGLE_STRIP;
+
         Actor a = makeBackButton();
         myUiStage.addActor(a);
+
+        modelBatch = new ModelBatch();
 
         setFadeIn();
     }
@@ -54,8 +102,11 @@ public class TestSceneTemplate extends Scene implements BrucieListener {
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        // Insert Test render code here
 
+        modelBatch.begin(mCamera);
+
+        modelBatch.render(mRenderable);
+        modelBatch.end();
 
         myUiStage.act(delta);
         myUiStage.draw();

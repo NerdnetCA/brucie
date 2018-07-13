@@ -29,7 +29,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
-public class VoxelWorld implements RenderableProvider {
+public class VoxelWorldOld implements RenderableProvider {
     public static final int CHUNK_SIZE_X = 16;
     public static final int CHUNK_SIZE_Y = 16;
     public static final int CHUNK_SIZE_Z = 16;
@@ -50,7 +50,7 @@ public class VoxelWorld implements RenderableProvider {
     public int numChunks;
     private final TextureRegion[] tiles;
 
-    public VoxelWorld (TextureRegion[] tiles, int chunksX, int chunksY, int chunksZ) {
+    public VoxelWorldOld(TextureRegion[] tiles, int chunksX, int chunksY, int chunksZ) {
         this.tiles = tiles;
         this.chunks = new VoxelChunk[chunksX * chunksY * chunksZ];
         this.chunksX = chunksX;

@@ -12,6 +12,18 @@
     classname: ca.nerdnet.brucie.test.master.TilemapTest,
   },
   {
+    name: VOXAL,
+    classname: ca.nerdnet.brucie.test.master.VoxalTest,
+  },
+  {
+    name: VOXAL2,
+    classname: ca.nerdnet.brucie.test.master.Voxal2Test,
+  },
+  {
+    name: TRISTRIP,
+    classname: ca.nerdnet.brucie.colin.TriangleStripTest,
+  },
+  {
     name: SHADERFX,
     classname: ca.nerdnet.brucie.test.master.ShaderFxTest,
   }
