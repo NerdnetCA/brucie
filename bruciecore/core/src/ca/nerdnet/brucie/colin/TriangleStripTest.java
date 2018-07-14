@@ -4,10 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -35,6 +41,7 @@ public class TriangleStripTest extends Scene implements BrucieListener {
     private Renderable mRenderable;
     private ModelBatch modelBatch;
     private PerspectiveCamera mCamera;
+    private Texture mTex;
 
 
     @Override
@@ -49,6 +56,7 @@ public class TriangleStripTest extends Scene implements BrucieListener {
     @Override
     public void preload() {
         loadAsset("ui/ctulublu_ui.json", Skin.class);
+        loadAsset("testb/uvref.png",Texture.class);
     }
 
     @Override
@@ -56,6 +64,8 @@ public class TriangleStripTest extends Scene implements BrucieListener {
         super.show();
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
         myUiStage = new UiStage();
+        mTex = assetManager.get("testb/uvref.png",Texture.class);
+        mTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         mCamera = new PerspectiveCamera(67,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         mCamera.position.set(4f,4f,4f);
@@ -64,28 +74,44 @@ public class TriangleStripTest extends Scene implements BrucieListener {
         mCamera.far = 300f;
         mCamera.update();
 
+        DirectionalLight mylight = new DirectionalLight();
+        mylight.setColor(1,1,1,1);
+        mylight.setDirection(-1,-1,-1);
+        Environment env = new Environment();
+        env.add(mylight);
+
 
         vertices = new float[] {
                 0,0,0, 0,0,
-                0,0,1,
-                1,0,0,
-                1,0,1
+                0,0,1, 0,1,
+                1,0,0, 1,0,
+                1,0,1, 1,1,
+                2,0,0, 2,0,
+                2,0,1, 2,1
+
         };
         indices = new short[] {
-                0,1,2,3
+                0,1,2,3,4,5
         };
 
-        mMesh = new Mesh(true,4*3,4,
+        mMesh = new Mesh(true,6*5,6,
                 new VertexAttribute(VertexAttributes.Usage.Position,3,"a_position"),
-                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, "a_texCoords")
+                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, "a_texCoord0")
 
         );
         mMesh.setVertices(vertices);
 
+        Material mat = new Material();
+        mat.set(TextureAttribute.createDiffuse(mTex));
+
+
         mRenderable = new Renderable();
+        mRenderable.material = mat;
+        mRenderable.environment = env;
         mRenderable.meshPart.mesh = mMesh;
+        //mRenderable.meshPart.mesh.re
         mRenderable.meshPart.offset = 0;
-        mRenderable.meshPart.size = 4;
+        mRenderable.meshPart.size = 6;
         mRenderable.meshPart.primitiveType = GL20.GL_TRIANGLE_STRIP;
 
         Actor a = makeBackButton();
@@ -105,6 +131,7 @@ public class TriangleStripTest extends Scene implements BrucieListener {
 
         modelBatch.begin(mCamera);
 
+        //mTex.bind(0);
         modelBatch.render(mRenderable);
         modelBatch.end();
 
