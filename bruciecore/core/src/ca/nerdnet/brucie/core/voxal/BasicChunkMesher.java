@@ -21,11 +21,7 @@ public class BasicChunkMesher implements IChunkMesher {
 
         MeshCompiler compiler = meshCompilerPool.obtain();
 
-        compiler.compile(
-                chunkData.width,
-                chunkData.height,
-                chunkData.depth,
-                chunkData.voxels);
+        compiler.compile(chunkData);
 
         VoxelMesh mesh = new VoxelMesh(compiler.getVertices(),compiler.getIndices(),
                 compiler.getNumVertices(),
@@ -50,13 +46,6 @@ public class BasicChunkMesher implements IChunkMesher {
         private static final int VERTEX_SIZE = 8 ;
 
         private int width, height, depth;
-
-        private int topStep;
-        private int bottomStep;
-        private int leftStep;
-        private int rightStep;
-        private int frontStep;
-        private int backStep;
 
 
         private int numVertices;
@@ -86,73 +75,47 @@ public class BasicChunkMesher implements IChunkMesher {
             indices = null;
         }
 
-        public void compile(int width, int height, int depth, short[] voxeldata) {
-            this.width = width;
-            this.height = height;
-            this.depth = depth;
+        public int compile(ChunkData chunkData) {
+            this.width = chunkData.width;
+            this.height = chunkData.height;
+            this.depth = chunkData.depth;
 
-            topStep = width * depth;
-            bottomStep = -width * depth;
-            leftStep = -1;
-            rightStep = 1;
-            frontStep = -width;
-            backStep = width;
+            int topStep = width * depth;
+            int bottomStep = -width * depth;
+            int leftStep = -1;
+            int rightStep = 1;
+            int frontStep = -width;
+            int backStep = width;
 
             calculateIndices();
             vertices = new float[width * height * depth * 6 * 4 / 2 * VERTEX_SIZE];
-            numIndices = 0;
             int i = 0;
             int vOff = 0;
             for (int y = 0; y < height; y++) {
                 for (int z = 0; z < depth; z++) {
                     for (int x = 0; x < width; x++, i++) {
-                        short voxel = voxels[i];
-                        if (voxel == 0) continue;
 
-                        if (y < height - 1) {
-                            if (voxels[i + topOffset] == 0)
-                                vOff = createTop(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createTop(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
-                        if (y > 0) {
-                            if (voxels[i + bottomOffset] == 0)
-                                vOff = createBottom(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createBottom(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
-                        if (x > 0) {
-                            if (voxels[i + leftOffset] == 0)
-                                vOff = createLeft(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createLeft(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
+                        short voxel = chunkData.get(x,y,z);
 
-                        if (x < width - 1) {
-                            if (voxels[i + rightOffset] == 0)
-                                vOff = createRight(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createRight(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
-                        if (z > 0) {
-                            if (voxels[i + frontOffset] == 0)
-                                vOff = createFront(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createFront(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
-                        if (z < depth - 1) {
-                            if (voxels[i + backOffset] == 0)
-                                vOff = createBack(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        } else {
-                            vOff = createBack(offset, x, y, z, mVertices, vOff, (short) (voxels[i]-1));
-                        }
+                        /*
+                        If voxel is solid, skip
+                         */
+
+
+                        /* If voxel is air, we need to check
+                        all 6 of its neighbours. For each that
+                        is solid, we need to draw a face for it.
+                         */
+
+
+
                     }
                 }
             }
 
+            numVertices = vOff/VERTEX_SIZE;
+
             return vOff / VERTEX_SIZE;
-
-
         }
 
         public void calculateIndices() {
