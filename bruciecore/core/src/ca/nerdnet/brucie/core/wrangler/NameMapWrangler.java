@@ -20,12 +20,12 @@ public class NameMapWrangler<T> implements Wrangler<T> {
 
     private Config mConfig;
 
-    public void config(WranglerConfig wranglerConfig) {
+    public void configure(WranglerConfig wranglerConfig) {
         if(wranglerConfig instanceof Config) {
             mConfig = (Config)wranglerConfig;
             mBrucieGame = mConfig.brucieGame;
         } else {
-            // Unrecognized config object.
+            // Unrecognized configure object.
             // TODO: Handle this error gracefully.
         }
     }

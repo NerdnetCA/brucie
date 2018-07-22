@@ -19,6 +19,8 @@ import ca.nerdnet.brucie.core.wrangler.WranglerConfig;
  *   2) Set the featureWrangler field. (probably create the instance)
  *   3) Set the sceneWrangler field. (probably create the instance)
  *
+ * See GameTemplate
+ *
  * The wranglers can be anything you want with the only requirement that
  * the feature wrangler also extends from CachedWrangler.
  *
@@ -36,7 +38,7 @@ public abstract class BrucieGame implements ApplicationListener {
     private static final int MODE_CUE = 0x21;    // Next scene is loaded, waiting for current to finish.
     private static final int MODE_LOADING = 0x12;// Current scene all done, waiting for next to load.
 
-    // Global config object.
+    // Global configure object.
     protected BrucieConfig brucieConfig;
 
     // Wranglers.
@@ -104,7 +106,6 @@ public abstract class BrucieGame implements ApplicationListener {
             // throw new BrucieException(); ?
             // or maybe do nothing?
             Gdx.app.log(TAG,"Attempted to queue scene with scene already queued!");
-            return;
         } else {
             // Attempt to wrangle the scene by name.
             // Set it as the next scene.
@@ -222,8 +223,7 @@ public abstract class BrucieGame implements ApplicationListener {
      * @return GameFeature
      */
     public GameFeature getFeature(String name) {
-        GameFeature f = featureWrangler.wrangle(name,null);
-        return f;
+        return featureWrangler.wrangle(name,null);
     }
 
     /** Register a feature in the wrangler.
@@ -238,8 +238,9 @@ public abstract class BrucieGame implements ApplicationListener {
     /** LibGDX method called when the display is resized or changed.
      * NOTE: Being created is a change.
      *
-     * @param width
-     * @param height
+     * @param width display width
+     * @param height display height
+     * @return none
      */
     @Override
     public void resize(int width, int height) {

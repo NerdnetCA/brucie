@@ -11,8 +11,8 @@ import ca.nerdnet.brucie.core.wrangler.NameMapWrangler;
  */
 public class GameTemplate extends BrucieGame {
 
-    /** Constructor. Saves the config object in a protected field.
-     *  If the parameter is null, a new config will be created.
+    /** Constructor. Saves the configure object in a protected field.
+     *  If the parameter is null, a new configure will be created.
      *
      * @param config BrucieConfig instance
      */
@@ -27,14 +27,14 @@ public class GameTemplate extends BrucieGame {
         // The core engine uses this to instantiate the Scenes
         // of your game. Set up the Scenes in the brucie/scenes.json file
         NameMapWrangler<Scene> w = new NameMapWrangler<Scene>();
-        w.config(new NameMapWrangler.Config(this,brucieConfig.getSceneConfig()));
+        w.configure(new NameMapWrangler.Config(this,brucieConfig.getSceneConfig()));
         sceneWrangler = w;
 
         // Set up feature wrangler.
         // Again, used to find feature handlers see brucie/features.json
         // GameFeature instances are singletons.
         CachedNameWrangler<GameFeature> sw = new CachedNameWrangler<GameFeature>();
-        sw.config(new NameMapWrangler.Config(this,brucieConfig.features_json));
+        sw.configure(new NameMapWrangler.Config(this,brucieConfig.features_json));
         featureWrangler = sw;
     }
 
