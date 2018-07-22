@@ -1,9 +1,10 @@
 package ca.nerdnet.brucie.desktop;
 
 import ca.nerdnet.brucie.core.BrucieConfig;
+import ca.nerdnet.brucie.core.GameTemplate;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import ca.nerdnet.brucie.BrucieCore;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -20,7 +21,7 @@ public class DesktopLauncher {
 		BrucieConfig bconfig = new BrucieConfig();
 
 		// Create game
-		BrucieCore game = new BrucieCore(bconfig);
+		GameTemplate game = new GameTemplate(bconfig);
 
 		// Register any dynamic features
 		//game.registerFeature("NULL");

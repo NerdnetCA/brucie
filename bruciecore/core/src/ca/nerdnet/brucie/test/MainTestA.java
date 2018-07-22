@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import ca.nerdnet.brucie.BrucieCore;
 import ca.nerdnet.brucie.core.*;
 import ca.nerdnet.brucie.core.ui.MenuSet;
 import ca.nerdnet.brucie.core.ui.Panel;

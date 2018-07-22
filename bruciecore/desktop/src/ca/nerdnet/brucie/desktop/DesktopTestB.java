@@ -3,8 +3,8 @@ package ca.nerdnet.brucie.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import ca.nerdnet.brucie.BrucieCore;
 import ca.nerdnet.brucie.core.BrucieConfig;
+import ca.nerdnet.brucie.core.GameTemplate;
 
 public class DesktopTestB {
 	public static void main (String[] arg) {
@@ -22,7 +22,7 @@ public class DesktopTestB {
 		bconfig.setSceneConfig("brucie/scenes_testb.json");
 
 		// Create game
-		BrucieCore game = new BrucieCore(bconfig);
+		GameTemplate game = new GameTemplate(bconfig);
 
 		// Register any dynamic features
 		//game.registerFeature("NULL");

@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
 import ca.nerdnet.brucie.core.wrangler.CachedNameWrangler;
+import ca.nerdnet.brucie.core.wrangler.CachedWrangler;
 import ca.nerdnet.brucie.core.wrangler.NameMapWrangler;
 import ca.nerdnet.brucie.core.wrangler.Wrangler;
 import ca.nerdnet.brucie.core.wrangler.WranglerConfig;
@@ -14,16 +15,16 @@ import ca.nerdnet.brucie.core.wrangler.WranglerConfig;
  * Main game handler.
  *
  * You are meant to extend this class with a constructor that does three things:
- *   1) call the superconstructor with the BrucieConfig parameter.
- *   2) Set the featureWrangler field. (Create the instance)
- *   3) Set the sceneWrangler field. (Create the instance)
+ *   1) Set BrucieConfig parameter (somehow. don't care how).
+ *   2) Set the featureWrangler field. (probably create the instance)
+ *   3) Set the sceneWrangler field. (probably create the instance)
  *
  * The wranglers can be anything you want with the only requirement that
- * the feature wrangler also extends from CachedNameWrangler.
+ * the feature wrangler also extends from CachedWrangler.
  *
  */
 
-public class BrucieGame implements ApplicationListener {
+public abstract class BrucieGame implements ApplicationListener {
     // Debug tag
     private static final String TAG = "BRUCIEGAME";
 
@@ -39,8 +40,8 @@ public class BrucieGame implements ApplicationListener {
     protected BrucieConfig brucieConfig;
 
     // Wranglers.
-    protected NameMapWrangler<Scene> sceneWrangler;
-    protected CachedNameWrangler<GameFeature> featureWrangler;
+    protected Wrangler<Scene> sceneWrangler;
+    protected CachedWrangler<GameFeature> featureWrangler;
 
     // Global asset manager.
     protected AssetManager assetManager;
@@ -52,33 +53,6 @@ public class BrucieGame implements ApplicationListener {
     private int myMode=0;
 
     private SplashScreen splash;
-
-    /** Constructor. Saves the config object in a protected field.
-     *  If the parameter is null, a new config will be created.
-     *
-     * @param config BrucieConfig instance
-     */
-    public BrucieGame(BrucieConfig config) {
-        if(config==null) {
-            brucieConfig = new BrucieConfig();
-        } else {
-            brucieConfig = config;
-        }
-
-        // Set up the Scene Wrangler.
-        // The core engine uses this to instantiate the Scenes
-        // of your game. Set up the Scenes in the brucie/scenes.json file
-        NameMapWrangler<Scene> w = new NameMapWrangler<Scene>();
-        w.config(new NameMapWrangler.Config(this,brucieConfig.getSceneConfig()));
-        sceneWrangler = w;
-
-        // Set up feature wrangler.
-        // Again, used to find feature handlers see brucie/features.json
-        // GameFeature instances are singletons.
-        CachedNameWrangler<GameFeature> sw = new CachedNameWrangler<GameFeature>();
-        sw.config(new NameMapWrangler.Config(this,brucieConfig.features_json));
-        featureWrangler = sw;
-    }
 
     /** This is called by libgdx when the libgdx part of the engine
      * is ready, and now we need to boot and configure the Brucie
