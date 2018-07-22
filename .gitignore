@@ -1,5 +1,6 @@
 ## Java
 
+*.directory
 *.class
 *.war
 *.ear

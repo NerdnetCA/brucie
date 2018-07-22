@@ -1,0 +1,104 @@
+
+mctiles.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Coat
+  rotate: false
+  xy: 484, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Dirt
+  rotate: false
+  xy: 484, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Glass
+  rotate: false
+  xy: 566, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Gold
+  rotate: false
+  xy: 566, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Leaves
+  rotate: false
+  xy: 648, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Redstone
+  rotate: false
+  xy: 648, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Sand
+  rotate: false
+  xy: 730, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Spritesheet
+  rotate: false
+  xy: 2, 6
+  size: 480, 240
+  orig: 480, 240
+  offset: 0, 0
+  index: -1
+Tnt
+  rotate: false
+  xy: 730, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Water
+  rotate: false
+  xy: 812, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+Wood
+  rotate: false
+  xy: 812, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+grass
+  rotate: false
+  xy: 894, 166
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+stone
+  rotate: false
+  xy: 894, 84
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+wood
+  rotate: false
+  xy: 484, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
