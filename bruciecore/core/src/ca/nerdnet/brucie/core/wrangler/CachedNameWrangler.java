@@ -1,26 +1,35 @@
-package ca.nerdnet.brucie.core;
+package ca.nerdnet.brucie.core.wrangler;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
+
+import java.util.Iterator;
+
+import ca.nerdnet.brucie.core.BrucieGame;
 
 /**
  * Wrangler for singleton classes.
  */
 
-public class SingletonWrangler<T> extends Wrangler<T> {
+public class CachedNameWrangler<T> extends NameMapWrangler<T> implements CachedWrangler<T> {
     private static final String TAG = "SINGLETONWRANGLER";
+
     protected ObjectMap<String, T> objectMap;
 
-    public SingletonWrangler(BrucieGame game) {
-        super(game);
+    public CachedNameWrangler() {
         objectMap = new ObjectMap<String, T>();
     }
 
-    public void registerWrangleable(String name, T inst) {
-        objectMap.put(name, inst);
+    public void register(String key, T inst) {
+        objectMap.put(key, inst);
     }
 
-    public T getWrangledInstance(String name,String param) {
+    @Override
+    public T wrangle(String name, WrangleParams param) {
         T inst = objectMap.get(name);
 
         if(inst != null) return inst;
@@ -32,7 +41,7 @@ public class SingletonWrangler<T> extends Wrangler<T> {
                 Gdx.app.log(TAG,"Wrangling class '"+classname+"' as "+name);
                 inst = (T) Class.forName(classname).getConstructor().newInstance();
                 if (inst instanceof WrangledObject) {
-                    ((WrangledObject) inst).configure(myGame,param);
+                    ((WrangledObject) inst).configure(mBrucieGame,param);
                 }
                 objectMap.put(name,inst);
                 return inst;
@@ -45,4 +54,5 @@ public class SingletonWrangler<T> extends Wrangler<T> {
         }
         return null;
     }
+
 }

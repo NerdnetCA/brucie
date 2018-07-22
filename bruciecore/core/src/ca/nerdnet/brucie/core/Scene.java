@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
+import ca.nerdnet.brucie.core.wrangler.WrangleParams;
+import ca.nerdnet.brucie.core.wrangler.WrangledObject;
+
 /**
  * Superclass for the scenes of the game.
  *
@@ -47,7 +50,7 @@ public abstract class Scene implements Screen, WrangledObject {
      * @param game
      * @param param
      */
-    public void configure(BrucieGame game, String param) {
+    public void configure(BrucieGame game, WrangleParams param) {
         myGame = game;
         assetList = new Array<String>(false,16);
         assetManager = myGame.getAssetManager();
