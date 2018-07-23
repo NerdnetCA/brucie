@@ -14,7 +14,7 @@
     title: "2D Tests",
     items: [
       {name: btn_main, title: "<--Back"},
-      {name: btn_basic2d, title: Sprites},
+      {name: btn_ui, title: UI Test},
       {name: btn_ts, title: ??},
       {name: btn_tilemap, title: Tiled Maps}
     ]

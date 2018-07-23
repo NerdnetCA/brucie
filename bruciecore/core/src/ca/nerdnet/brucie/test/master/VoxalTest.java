@@ -25,8 +25,8 @@ import ca.nerdnet.brucie.core.BrucieListener;
 import ca.nerdnet.brucie.core.Scene;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
-import ca.nerdnet.brucie.core.voxal.ChunkData;
-import ca.nerdnet.brucie.core.voxal.ChunkMesh2;
+import ca.nerdnet.brucie.b3d.voxal.ChunkData;
+import ca.nerdnet.brucie.b3d.voxal.ChunkMesh2;
 import ca.nerdnet.brucie.test.testb.ShaderB2;
 
 public class VoxalTest extends Scene implements BrucieListener {

@@ -3,20 +3,13 @@ package ca.nerdnet.brucie.test.master;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
-import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.graphics.g3d.Shader;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
@@ -26,21 +19,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.Pool;
-
-import javax.swing.text.AttributeSet;
 
 import ca.nerdnet.brucie.core.BrucieEvent;
 import ca.nerdnet.brucie.core.BrucieListener;
 import ca.nerdnet.brucie.core.Scene;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
-import ca.nerdnet.brucie.core.voxal.ChunkData;
-import ca.nerdnet.brucie.core.voxal.ChunkMesh2;
+import ca.nerdnet.brucie.b3d.voxal.ChunkData;
+import ca.nerdnet.brucie.b3d.voxal.ChunkMesh2;
 import ca.nerdnet.brucie.test.testb.ShaderB2;
-import ca.nerdnet.brucie.voxal.VoxelChunk;
 
 public class Voxal2Test extends Scene implements BrucieListener {
     private static final String TAG = "VOXAL2TEST";

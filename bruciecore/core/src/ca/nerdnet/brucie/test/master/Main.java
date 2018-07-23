@@ -113,6 +113,10 @@ public class Main extends Scene implements BrucieListener {
             myGame.queueScene("TRISTRIP");
             setFadeOut();
             return true;
+        } else if("btn_ui".equals(action)) {
+            myGame.queueScene("UITEST");
+            setFadeOut();
+            return true;
         } else if("btn_main".equals(action)) {
             flingMenu("MAIN");
             return true;

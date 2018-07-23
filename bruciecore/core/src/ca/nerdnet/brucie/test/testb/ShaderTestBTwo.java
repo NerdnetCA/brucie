@@ -3,23 +3,15 @@ package ca.nerdnet.brucie.test.testb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GLTexture;
-import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttribute;
-import com.badlogic.gdx.graphics.VertexAttributes;
-import com.badlogic.gdx.graphics.g3d.Attributes;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Renderable;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
-import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -32,11 +24,8 @@ import ca.nerdnet.brucie.core.BrucieListener;
 import ca.nerdnet.brucie.core.Scene;
 import ca.nerdnet.brucie.core.ui.ButtonEventAdapter;
 import ca.nerdnet.brucie.core.ui.UiStage;
-import ca.nerdnet.brucie.core.util.CoreShader;
-import ca.nerdnet.brucie.core.voxal.ChunkData;
-import ca.nerdnet.brucie.core.voxal.ChunkMesh;
-import ca.nerdnet.brucie.core.voxal.ChunkMesh2;
-import ca.nerdnet.brucie.voxal.VoxelChunk;
+import ca.nerdnet.brucie.b3d.voxal.ChunkData;
+import ca.nerdnet.brucie.b3d.voxal.ChunkMesh2;
 
 public class ShaderTestBTwo extends Scene implements BrucieListener {
     private static final String TAG = "VOXALTEST";
@@ -69,7 +58,7 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
     @Override
     public void preload() {
 
-        loadAsset("mastertest/mctiles.png",Texture.class);
+        loadAsset("mastertest/voxtiles/toruqtiles.png",Texture.class);
         loadAsset("ui/ctulublu_ui.json", Skin.class);
     }
 
@@ -79,7 +68,7 @@ public class ShaderTestBTwo extends Scene implements BrucieListener {
         mySkin = assetManager.get("ui/ctulublu_ui.json", Skin.class);
         myUiStage = new UiStage();
 
-        mTex = assetManager.get("testb/uvref.png",Texture.class);
+        mTex = assetManager.get("mastertest/voxtiles/toruqtiles.png",Texture.class);
         mTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         vchunk = new ChunkData(16,16,16);

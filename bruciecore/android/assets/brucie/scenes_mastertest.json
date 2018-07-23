@@ -26,5 +26,9 @@
   {
     name: SHADERFX,
     classname: ca.nerdnet.brucie.test.master.ShaderFxTest,
+  },
+  {
+    name: UITEST,
+    classname: ca.nerdnet.brucie.test.master.UiTest,
   }
 ]

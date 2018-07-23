@@ -7,6 +7,7 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
     body-font: { file: moonhouse-small.fnt },
 
 },
+
 com.badlogic.gdx.graphics.Color: {
 	green: { a: 1, b: 0, g: 1, r: 0 },
 	white: { a: 1, b: 1, g: 1, r: 1 },

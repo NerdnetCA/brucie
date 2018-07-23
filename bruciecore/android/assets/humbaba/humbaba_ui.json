@@ -1,0 +1,141 @@
+{
+
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    default-font: { file: baloo_white32.fnt },
+    headline-font: { file: baloo_white32.fnt },
+    button-font: { file: baloo_white32.fnt },
+    body-font: { file: baloo_white32.fnt },
+
+},
+
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	blue: { a: 1, b: 1, g:0, r:0},
+	black: { a: 1, b: 0, g: 0, r: 0 },
+
+    color_ghost: {a:1, r:0.6, g:0.6, b:0.6 },
+
+    color_wash: { a:1.2, r: 1, g:1, b:1},
+
+    color_select: { a:1, r: 0.2, g:0.2, b:0.7},
+
+
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+
+    button_round_blue_wash: {
+        name: button_round_blue,
+        color: color_wash,
+    },
+    button_round_orange_wash: {
+        name: button_round_orange,
+        color: color_wash,
+    },
+
+    selection: {
+		name: select,
+		color: color_select,
+		fontColor: black
+	}
+
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: {
+		background: gutter_horz,
+		knob: knob_horz,
+	},
+	default-vertical: {
+		background: gutter_vert,
+		knob: knob_vert,
+	}
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: {  down: button_border_round_orange,
+	            up:   button_border_round_blue,
+	            disabled: button_border_round_grey,
+	         },
+
+	plain_blue: {  down: button_round_blue_wash,
+	            up:   button_round_blue,
+	            disabled: button_round_grey,
+	         },
+
+	toggle: {   down: button_border_square_box_orange,
+	            checked: button_border_square_checked_blue,
+	            up: button_border_square_box_blue,
+	            disabled: button_border_square_box_grey
+	        },
+
+
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+	    down: button_border_square_orange,
+	    up: button_border_square_blue,
+	    font: default-font,
+	    disabled: button_border_square_grey,
+	    disabledFontColor: color_ghost
+	    },
+
+
+	toggle: { font: default-font }
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle : {
+    default: { font: headline-font },
+    small: { font: default-font },
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: {
+		hScroll: gutter_horz,
+		hScrollKnob: knob_horz,
+		vScroll: gutter_vert,
+		vScrollKnob: knob_vert,
+	},
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+    default: {
+        font: default-font,
+        fontColorSelected: white,
+        fontColorUnselected: color_ghost,
+        selection: selection,
+        background: frame_dark,
+    },
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+	default-horizontal: { background: gutter_horz, knobBefore: knob_horz },
+	default-vertical: { background: gutter_vert, knob: knob_vert }
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: default-font
+		fontColor: white
+		background: field_dark
+		cursor: cursor
+		selection: selection
+	}
+}
+
+
+com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+    default: {
+        font: default-font,
+        fontColor: white,
+        background: field_light_plus_light,
+        backgroundOpen: field_light_plus_dark,
+        backgroundOver: field_light_plus_light,
+        listStyle: default,
+        scrollStyle: default,
+    },
+},
+
+}
