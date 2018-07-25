@@ -2,7 +2,7 @@
 
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
     default-font: { file: baloo_white32.fnt },
-    headline-font: { file: baloo_white32.fnt },
+    heading1-font: { file: baloo_white48.fnt },
     button-font: { file: baloo_white32.fnt },
     body-font: { file: baloo_white32.fnt },
 
@@ -15,25 +15,17 @@ com.badlogic.gdx.graphics.Color: {
 	blue: { a: 1, b: 1, g:0, r:0},
 	black: { a: 1, b: 0, g: 0, r: 0 },
 
-    color_ghost: {a:1, r:0.6, g:0.6, b:0.6 },
+    color_ghost: {a:1, r:0.35, g:0.35, b:0.35 },
 
     color_wash: { a:1.2, r: 1, g:1, b:1},
 
-    color_select: { a:1, r: 0.2, g:0.2, b:0.7},
+    color_select: { a:0.8, r: 0.2, g:0.2, b:0.65},
 
 
 },
 
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 
-    button_round_blue_wash: {
-        name: button_round_blue,
-        color: color_wash,
-    },
-    button_round_orange_wash: {
-        name: button_round_orange,
-        color: color_wash,
-    },
 
     selection: {
 		name: select,
@@ -60,7 +52,14 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	            disabled: button_border_round_grey,
 	         },
 
-	plain_blue: {  down: button_round_blue_wash,
+    facebook: {
+        up: button_border_round_blue,
+        down: button_border_round_orange,
+        disabled: button_border_round_grey,
+    },
+
+
+	plain_blue: {  down: button_round_orange,
 	            up:   button_round_blue,
 	            disabled: button_round_grey,
 	         },
@@ -70,9 +69,168 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	            up: button_border_square_box_blue,
 	            disabled: button_border_square_box_grey
 	        },
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+    default: { up: button_border_round_blue,
+                down: button_border_round_orange,
+                disabled: button_border_round_grey,
+    },
+    button_save: {
+        up: button_border_round_blue,
+        down: button_border_round_orange,
+        disabled: button_border_round_grey,
+        imageUp: icon_save,
+        imageDown: icon_save,
+    },
+
+    round_plain_bluecerul : {
+        up:     button_round_blue,
+        down:   button_round_cerul,
+        disabled: button_round_grey,
+    },
+    round_plain_blueorange : {
+        up:     button_round_blue,
+        down:   button_round_orange,
+        disabled: button_round_grey,
+    },
+    round_plain_redorange : {
+        up:     button_round_red,
+        down:   button_round_orange,
+        disabled: button_round_grey,
+    },
+    round_plain_redyellow : {
+        up:     button_round_red,
+        down:   button_round_yellow,
+        disabled: button_round_grey,
+    },
+    round_plain_cerulbone : {
+        up:     button_round_cerul,
+        down:   button_round_bone,
+        disabled: button_round_grey,
+    },
+    round_plain_cerulyellow : {
+        up:     button_round_cerul,
+        down:   button_round_yellow,
+        disabled: button_round_grey,
+    },
+    round_plain_yellowgreen : {
+        up:     button_round_yellow,
+        down:   button_round_green,
+        disabled: button_round_grey,
+    },
+    round_plain_yellowred : {
+        up:     button_round_yellow,
+        down:   button_round_red,
+        disabled: button_round_grey,
+    },
+    round_plain_orangered : {
+        up:     button_round_orange,
+        down:   button_round_red,
+        disabled: button_round_grey,
+    },
+    round_plain_orangecerul : {
+        up:     button_round_orange,
+        down:   button_round_cerul,
+        disabled: button_round_grey,
+    },
+    round_plain_greenorange : {
+        up:     button_round_green,
+        down:   button_round_orange,
+        disabled: button_round_grey,
+    },
+    round_plain_greenbone : {
+        up:     button_round_green,
+        down:   button_round_bone,
+        disabled: button_round_grey,
+    },
+    round_plain_boneyellow : {
+        up:     button_round_bone,
+        down:   button_round_yellow,
+        disabled: button_round_grey,
+    },
+    round_plain_bonecerul : {
+        up:     button_round_bone,
+        down:   button_round_cerul,
+        disabled: button_round_grey,
+    },
+
+
+
+    round_bordered_bluecerul : {
+        up:     button_border_round_blue,
+        down:   button_border_round_cerul,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_blueorange : {
+        up:     button_border_round_blue,
+        down:   button_border_round_orange,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_redorange : {
+        up:     button_border_round_red,
+        down:   button_border_round_orange,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_redyellow : {
+        up:     button_border_round_red,
+        down:   button_border_round_yellow,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_cerulbone : {
+        up:     button_border_round_cerul,
+        down:   button_border_round_bone,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_cerulyellow : {
+        up:     button_border_round_cerul,
+        down:   button_border_round_yellow,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_yellowgreen : {
+        up:     button_border_round_yellow,
+        down:   button_border_round_green,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_yellowred : {
+        up:     button_border_round_yellow,
+        down:   button_border_round_red,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_orangered : {
+        up:     button_border_round_orange,
+        down:   button_border_round_red,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_orangecerul : {
+        up:     button_border_round_orange,
+        down:   button_border_round_cerul,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_greenorange : {
+        up:     button_border_round_green,
+        down:   button_border_round_orange,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_greenbone : {
+        up:     button_border_round_green,
+        down:   button_border_round_bone,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_boneyellow : {
+        up:     button_border_round_bone,
+        down:   button_border_round_yellow,
+        disabled: button_border_round_grey,
+    },
+    round_bordered_bonecerul : {
+        up:     button_border_round_bone,
+        down:   button_border_round_cerul,
+        disabled: button_border_round_grey,
+    },
 
 
 },
+
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 	    down: button_border_square_orange,
@@ -82,21 +240,225 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	    disabledFontColor: color_ghost
 	    },
 
+    square_bordered_bluecerul : {
+        up:     button_border_square_blue,
+        down:   button_border_square_cerul,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_blueorange : {
+        up:     button_border_square_blue,
+        down:   button_border_square_orange,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_redorange : {
+        up:     button_border_square_red,
+        down:   button_border_square_orange,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_redyellow : {
+        up:     button_border_square_red,
+        down:   button_border_square_yellow,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_cerulbone : {
+        up:     button_border_square_cerul,
+        down:   button_border_square_bone,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_cerulyellow : {
+        up:     button_border_square_cerul,
+        down:   button_border_square_yellow,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_yellowgreen : {
+        up:     button_border_square_yellow,
+        down:   button_border_square_green,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_yellowred : {
+        up:     button_border_square_yellow,
+        down:   button_border_square_red,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_orangered : {
+        up:     button_border_square_orange,
+        down:   button_border_square_red,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_orangecerul : {
+        up:     button_border_square_orange,
+        down:   button_border_square_cerul,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_greenorange : {
+        up:     button_border_square_green,
+        down:   button_border_square_orange,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_greenbone : {
+        up:     button_border_square_green,
+        down:   button_border_square_bone,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_boneyellow : {
+        up:     button_border_square_bone,
+        down:   button_border_square_yellow,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_bordered_bonecerul : {
+        up:     button_border_square_bone,
+        down:   button_border_square_cerul,
+        disabled: button_border_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
 
-	toggle: { font: default-font }
+
+    square_plain_bluecerul : {
+        up:     button_square_blue,
+        down:   button_square_cerul,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_blueorange : {
+        up:     button_square_blue,
+        down:   button_square_orange,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_redorange : {
+        up:     button_square_red,
+        down:   button_square_orange,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_redyellow : {
+        up:     button_square_red,
+        down:   button_square_yellow,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_cerulbone : {
+        up:     button_square_cerul,
+        down:   button_square_bone,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_cerulyellow : {
+        up:     button_square_cerul,
+        down:   button_square_yellow,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_yellowgreen : {
+        up:     button_square_yellow,
+        down:   button_square_green,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_yellowred : {
+        up:     button_square_yellow,
+        down:   button_square_red,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_orangered : {
+        up:     button_square_orange,
+        down:   button_square_red,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_orangecerul : {
+        up:     button_square_orange,
+        down:   button_square_cerul,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_greenorange : {
+        up:     button_square_green,
+        down:   button_square_orange,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_greenbone : {
+        up:     button_square_green,
+        down:   button_square_bone,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_boneyellow : {
+        up:     button_square_bone,
+        down:   button_square_yellow,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+    square_plain_bonecerul : {
+        up:     button_square_bone,
+        down:   button_square_cerul,
+        disabled: button_square_grey,
+        disabledFontColor: color_ghost,
+        font: default-font
+    },
+
 },
 
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle : {
-    default: { font: headline-font },
-    small: { font: default-font },
+    default: { font: default-font },
+    heading1: { font: heading1-font },
 },
 
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: {
 		hScroll: gutter_horz,
 		hScrollKnob: knob_horz,
-		vScroll: gutter_vert,
-		vScrollKnob: knob_vert,
+		vScroll: scroll_gutter_vert,
+		vScrollKnob: scroll_knob_vert,
+	},
+	framed: {
+	    hScroll: gutter_horz,
+	    hScrollKnob: knob_horz,
+	    vScroll: scroll_gutter_vert,
+	    vScrollKnob: scroll_knob_vert,
+	    background: frame_light,
 	},
 },
 
@@ -108,6 +470,12 @@ com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
         selection: selection,
         background: frame_dark,
     },
+    plain: {
+        font: default-font,
+        fontColorSelected: white,
+        fontColorUnselected: color_ghost,
+        selection: selection,
+    },
 },
 
 com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
@@ -118,7 +486,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
 		font: default-font
-		fontColor: white
+		fontColor: red
 		background: field_dark
 		cursor: cursor
 		selection: selection
@@ -134,7 +502,7 @@ com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
         backgroundOpen: field_light_plus_dark,
         backgroundOver: field_light_plus_light,
         listStyle: default,
-        scrollStyle: default,
+        scrollStyle: framed,
     },
 },
 
