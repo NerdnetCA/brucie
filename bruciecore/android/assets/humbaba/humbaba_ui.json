@@ -64,6 +64,151 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	            disabled: button_round_grey,
 	         },
 
+	    round_plain_bluecerul : {
+            up:     button_round_blue,
+            down:   button_round_cerul,
+            disabled: button_round_grey,
+        },
+        round_plain_blueorange : {
+            up:     button_round_blue,
+            down:   button_round_orange,
+            disabled: button_round_grey,
+        },
+        round_plain_redorange : {
+            up:     button_round_red,
+            down:   button_round_orange,
+            disabled: button_round_grey,
+        },
+        round_plain_redyellow : {
+            up:     button_round_red,
+            down:   button_round_yellow,
+            disabled: button_round_grey,
+        },
+        round_plain_cerulbone : {
+            up:     button_round_cerul,
+            down:   button_round_bone,
+            disabled: button_round_grey,
+        },
+        round_plain_cerulyellow : {
+            up:     button_round_cerul,
+            down:   button_round_yellow,
+            disabled: button_round_grey,
+        },
+        round_plain_yellowgreen : {
+            up:     button_round_yellow,
+            down:   button_round_green,
+            disabled: button_round_grey,
+        },
+        round_plain_yellowred : {
+            up:     button_round_yellow,
+            down:   button_round_red,
+            disabled: button_round_grey,
+        },
+        round_plain_orangered : {
+            up:     button_round_orange,
+            down:   button_round_red,
+            disabled: button_round_grey,
+        },
+        round_plain_orangecerul : {
+            up:     button_round_orange,
+            down:   button_round_cerul,
+            disabled: button_round_grey,
+        },
+        round_plain_greenorange : {
+            up:     button_round_green,
+            down:   button_round_orange,
+            disabled: button_round_grey,
+        },
+        round_plain_greenbone : {
+            up:     button_round_green,
+            down:   button_round_bone,
+            disabled: button_round_grey,
+        },
+        round_plain_boneyellow : {
+            up:     button_round_bone,
+            down:   button_round_yellow,
+            disabled: button_round_grey,
+        },
+        round_plain_bonecerul : {
+            up:     button_round_bone,
+            down:   button_round_cerul,
+            disabled: button_round_grey,
+        },
+
+
+
+        round_bordered_bluecerul : {
+            up:     button_border_round_blue,
+            down:   button_border_round_cerul,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_blueorange : {
+            up:     button_border_round_blue,
+            down:   button_border_round_orange,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_redorange : {
+            up:     button_border_round_red,
+            down:   button_border_round_orange,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_redyellow : {
+            up:     button_border_round_red,
+            down:   button_border_round_yellow,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_cerulbone : {
+            up:     button_border_round_cerul,
+            down:   button_border_round_bone,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_cerulyellow : {
+            up:     button_border_round_cerul,
+            down:   button_border_round_yellow,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_yellowgreen : {
+            up:     button_border_round_yellow,
+            down:   button_border_round_green,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_yellowred : {
+            up:     button_border_round_yellow,
+            down:   button_border_round_red,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_orangered : {
+            up:     button_border_round_orange,
+            down:   button_border_round_red,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_orangecerul : {
+            up:     button_border_round_orange,
+            down:   button_border_round_cerul,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_greenorange : {
+            up:     button_border_round_green,
+            down:   button_border_round_orange,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_greenbone : {
+            up:     button_border_round_green,
+            down:   button_border_round_bone,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_boneyellow : {
+            up:     button_border_round_bone,
+            down:   button_border_round_yellow,
+            disabled: button_border_round_grey,
+        },
+        round_bordered_bonecerul : {
+            up:     button_border_round_bone,
+            down:   button_border_round_cerul,
+            disabled: button_border_round_grey,
+        },
+
+
 	toggle: {   down: button_border_square_box_orange,
 	            checked: button_border_square_checked_blue,
 	            up: button_border_square_box_blue,
