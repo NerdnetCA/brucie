@@ -1,0 +1,257 @@
+
+cuticle_alphablue.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button_bar_disabled
+  rotate: false
+  xy: 424, 798
+  size: 160, 116
+  split: 42, 40, 35, 33
+  pad: 33, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_bar_down
+  rotate: false
+  xy: 424, 680
+  size: 160, 116
+  split: 42, 40, 35, 33
+  pad: 33, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_bar_up
+  rotate: false
+  xy: 424, 562
+  size: 160, 116
+  split: 42, 40, 35, 33
+  pad: 33, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_round_disabled
+  rotate: false
+  xy: 586, 786
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+button_round_down
+  rotate: false
+  xy: 586, 656
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+button_round_up
+  rotate: false
+  xy: 586, 526
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+button_toggle_checked
+  rotate: false
+  xy: 424, 444
+  size: 160, 116
+  split: 77, 40, 80, 32
+  pad: 83, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_toggle_disabled
+  rotate: false
+  xy: 424, 326
+  size: 160, 116
+  split: 77, 40, 80, 32
+  pad: 83, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_toggle_down
+  rotate: false
+  xy: 132, 116
+  size: 160, 116
+  split: 77, 40, 80, 32
+  pad: 83, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_toggle_up
+  rotate: false
+  xy: 294, 116
+  size: 160, 116
+  split: 77, 40, 80, 32
+  pad: 83, 33, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+button_x
+  rotate: false
+  xy: 586, 396
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+checkbox_off
+  rotate: false
+  xy: 2, 84
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+checkbox_off_disabled
+  rotate: false
+  xy: 586, 266
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+checkbox_on
+  rotate: false
+  xy: 456, 196
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+checkbox_on_disabled
+  rotate: false
+  xy: 456, 66
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 390, 288
+  size: 4, 34
+  split: 1, 1, 0, 0
+  pad: 0, 0, 0, 0
+  orig: 4, 34
+  offset: 0, 0
+  index: -1
+field_lite
+  rotate: false
+  xy: 84, 234
+  size: 304, 88
+  split: 11, 13, 9, 10
+  pad: 13, 11, 8, 8
+  orig: 304, 88
+  offset: 0, 0
+  index: -1
+frame_dark
+  rotate: false
+  xy: 84, 620
+  size: 338, 294
+  split: 54, 56, 48, 50
+  pad: 44, 47, 41, 42
+  orig: 338, 294
+  offset: 0, 0
+  index: -1
+frame_light
+  rotate: false
+  xy: 84, 324
+  size: 338, 294
+  split: 54, 56, 48, 50
+  pad: 44, 47, 41, 42
+  orig: 338, 294
+  offset: 0, 0
+  index: -1
+gradient
+  rotate: false
+  xy: 586, 136
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+knob_slider_horz
+  rotate: false
+  xy: 2, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+knob_slider_vert
+  rotate: false
+  xy: 878, 916
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+select
+  rotate: false
+  xy: 84, 224
+  size: 8, 8
+  split: 1, 1, 1, 1
+  pad: 0, 0, 0, 0
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+selectbox_disabled
+  rotate: false
+  xy: 586, 18
+  size: 160, 116
+  split: 41, 72, 80, 32
+  pad: 33, 71, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+selectbox_down
+  rotate: false
+  xy: 716, 880
+  size: 160, 116
+  split: 41, 72, 80, 32
+  pad: 33, 71, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+selectbox_up
+  rotate: false
+  xy: 716, 762
+  size: 160, 116
+  split: 41, 72, 80, 32
+  pad: 33, 71, 22, 21
+  orig: 160, 116
+  offset: 0, 0
+  index: -1
+slidegutter_horz
+  rotate: false
+  xy: 2, 916
+  size: 700, 80
+  split: 40, 39, 39, 39
+  pad: 0, 0, 0, 0
+  orig: 700, 80
+  offset: 0, 0
+  index: -1
+slidegutter_vert
+  rotate: false
+  xy: 2, 214
+  size: 80, 700
+  split: 39, 39, 40, 39
+  pad: 0, 0, 0, 0
+  orig: 80, 700
+  offset: 0, 0
+  index: -1
+star_blank
+  rotate: false
+  xy: 716, 680
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+star_gold
+  rotate: false
+  xy: 878, 834
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+star_grey
+  rotate: false
+  xy: 716, 598
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1

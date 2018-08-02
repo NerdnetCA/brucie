@@ -120,6 +120,10 @@ public class Main extends Scene implements BrucieListener {
         } else if("btn_main".equals(action)) {
             flingMenu("MAIN");
             return true;
+        } else if("btn_uitest2".equals(action)) {
+            myGame.queueScene("UITEST2");
+            setFadeOut();
+            return true;
         }
         return false;
     }

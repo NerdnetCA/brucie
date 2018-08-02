@@ -13,7 +13,9 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 
-		BrucieCore b = new BrucieCore(new BrucieConfig());
+		BrucieConfig.setSceneConfig("brucie/scenes_mastertest.json");
+
+		GameTemplate b = new GameTemplate(new BrucieConfig());
 
 
 		initialize(b , config);

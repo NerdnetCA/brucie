@@ -28,6 +28,10 @@
     classname: ca.nerdnet.brucie.test.master.ShaderFxTest,
   },
   {
+    name: UITEST2,
+    classname: ca.nerdnet.brucie.test.master.UiTest2,
+  },
+  {
     name: UITEST,
     classname: ca.nerdnet.brucie.test.master.UiTest,
   }

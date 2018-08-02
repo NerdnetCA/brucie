@@ -15,6 +15,7 @@
     items: [
       {name: btn_main, title: "<--Back"},
       {name: btn_ui, title: UI Test},
+      {name: btn_uitest2, title: UI Test 2},
       {name: btn_ts, title: ??},
       {name: btn_tilemap, title: Tiled Maps}
     ]

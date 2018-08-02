@@ -17,19 +17,25 @@ public class UiStage extends Stage {
     OrthographicCamera mCamera;
 
     public UiStage() {
+        this(BrucieConfig.getVWidth(), BrucieConfig.getVHeight());
+    }
+
+    public UiStage(int width, int height) {
         mCamera = new OrthographicCamera();
         mCamera.setToOrtho(false,
-                BrucieConfig.getVWidth(),
-                BrucieConfig.getVHeight()
+                width,
+                height
         );
         mViewport = new FitViewport(
-                BrucieConfig.getVWidth(),
-                BrucieConfig.getVHeight(),
+                width,
+                height,
                 mCamera
         );
         Gdx.input.setInputProcessor(this);
         setViewport(mViewport);
     }
+
+
 
     public void resize(int screenWidth, int screenHeight) {
         mViewport.update(screenWidth,screenHeight);
