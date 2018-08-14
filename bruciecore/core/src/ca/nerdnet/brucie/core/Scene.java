@@ -152,6 +152,7 @@ public abstract class Scene implements Screen, WrangledObject {
                     break;
             }
 
+            Gdx.gl.glViewport(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             fadeRenderer.setProjectionMatrix(mCamera.combined);
